@@ -7,7 +7,7 @@ function setup()
 	createCanvas(windowWidth, windowHeight);
 	// translate(width/2, height/2);
 	//  scale(1,-1);
-	background(0, 255, 200);
+	background(255);
 	stroke(255, 0, 0);
 	strokeWeight(5);
 	point(0, 0);
@@ -25,49 +25,68 @@ function setup()
 	}
 	let tik = width / 10;
 	let tok = height / 10;
-	for (var x = 0; x < width; x += width / 10)
+	for (var x = 0; x < width; x += tik)
 	{
-		for (var y = 0; y < height; y += height / 10)
+		for (var y = 0; y < height; y += tok)
 		{
-			line(x, 0, x, height);
-			line(0, y, width, y);
+			//line(x, 0, x, height);
+			//line(0, y, width, y);
 		}
 	}
 	stroke("red");
 	let x1 = 0;
 	let x2 = tik;
 	let y1 = 0;
-	for (let j = 0; j <= row.length; j++)
-	{
-		for (let x = 0; x <= row.length; x++)
-		{
-			if (row[j]==0)
-			{
-				line(x1, y1, x2, y1);
-				console.log("true : " + y1);
-				x1 = x1 + (2 * tik);
-				x2 = x2 + (2 * tik);
-				stroke("yellow");
-			}
-			else
-			{
-				if (x == 0)
-				{
-					x1 = tik;
-					x2 = tik + x1;
-				}
-				line(x1, y1, x2, y1);
-				console.log("true : " + y1);
-				x1 = x1 + (2 * tik);
-				x2 = x2 + (2 * tik);
-				stroke("red");
-			}
-			//console.log(`x1:${x1} x2: ${x2} levl : ${j}`);
-		}
-		if (j != 0)
-		{
-			y1 = j * tok;
-		}
-		console.log("weee" + y1)
+	for(let i=0;i<10;i++){
+	  //drawing a horizontal line
+	  if(col[i] == 0){
+	    drawOdd(width,tik,i*tok,true);
+	  }else{
+	    drawEven(width,tik,i*tok,true);
+	  }
 	}
+	for(let i=0;i<10;i++){
+	  //drawing a vertical line
+	  if(row[i] == 0){
+	    drawOddVert(height,tok,i*tik);
+	  }else{
+	    drawEvenVert(height,tok,i*tik);
+	  }
+	}
+}
+function drawOdd(size,tik,y2){
+  let x1 = 0;
+  let x2 = tik;
+  while(x2<=size){
+    line(x1,y2,x2,y2);
+    x1 = x1+(2*tik);
+    x2 = x2+(2*tik);
+  }
+}
+function drawEven(size,tik,y2){
+  let x1 = tik;
+  let x2 = tik + x1;
+  while(x2<=size){
+    line(x1,y2,x2,y2);
+    x1 = x1+(2*tik);
+    x2 = x2+(2*tik);
+  }
+}
+function drawOddVert(size,tik,x1){
+  let y1 = 0;
+  let y2 = tik;
+  while(y2<=size){
+    line(x1,y1,x1,y2);
+    y1 = y1+(2*tik);
+    y2 = y2+(2*tik);
+  }
+}
+function drawEvenVert(size,tik,x1){
+  let y1 = tik;
+  let y2 = tik + y1;
+  while(y2<=size){
+    line(x1,y1,x1,y2);
+    y1 = y1+(2*tik);
+    y2 = y2+(2*tik);
+  }
 }
